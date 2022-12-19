@@ -11,20 +11,28 @@ class VectorClock:
     def __str__(self):
         return f"{list(self.clocks.items())}"
 
-    def __add__(self, new):
+    def __add__(self, other):
         result = VectorClock()
         compare = lambda K, V, clocks: V if V > clocks.get(K, -1) else clocks.get(K)
 
         for k, v in self.clocks.items():
-            result.set(k, compare(k, v, new.clocks))
+            result.set(k, compare(k, v, other.clocks))
 
-        for k, v in new.clocks.items():
+        for k, v in other.clocks.items():
             result.set(k, compare(k, v, self.clocks))
 
         return result
 
     def __eq__(self, other):
         return self.clocks == other.clocks
+
+    def __lt__(self, other):
+        for k, v in self.clocks.items():
+            otherK = other.clocks.get(k, False)
+            if otherK:
+                result = v > otherK
+
+        return result or False
 
 
 if __name__ == "__main__":
