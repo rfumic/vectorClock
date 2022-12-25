@@ -34,6 +34,22 @@ class VectorClock:
 
         return result or False
 
+    def __floordiv__(self,other):
+#        greater = False
+#        less = False
+#        
+#        for k,v in self.clocks.items():
+#            if k in other.clocks:
+#                if v > other.clocks[k]:
+#                    greater = True
+#                elif v < other.clocks[k]:
+#                    less = True
+#            
+#        if greater and less:
+#            return True
+#                
+#        return False
+        return 'Neznam :('
 
 if __name__ == "__main__":
 
